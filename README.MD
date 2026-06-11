@@ -1,1 +1,10 @@
+*This project has been created as part of the 42 curriculum by fsayuri-*1
+*This project has been created as part of the 42 curriculum by fsayuri-*2
+*This project has been created as part of the 42 curriculum by fsayuri-*3
+*This project has been created as part of the 42 curriculum by fsayuri-*4
+*This project has been created as part of the 42 curriculum by fsayuri-*5
+*This project has been created as part of the 42 curriculum by fsayuri-*6
+*This project has been created as part of the 42 curriculum by fsayuri-*7
+*This project has been created as part of the 42 curriculum by fsayuri-*8
+*This project has been created as part of the 42 curriculum by fsayuri-*9
 *This project has been created as part of the 42 curriculum by fsayuri-*
