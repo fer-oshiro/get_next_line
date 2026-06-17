@@ -6,7 +6,7 @@
 /*   By: fsayuri- <fsayuri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 18:06:24 by fsayuri-          #+#    #+#             */
-/*   Updated: 2026/06/11 17:31:55 by fsayuri-         ###   ########.fr       */
+/*   Updated: 2026/06/11 18:31:02 by fsayuri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_strjoin(char *s1, char const *s2)
 		s2++;
 		i++;
 	}
-	free(s1);
 	str_join[i] = '\0';
 	return (str_join);
 }
