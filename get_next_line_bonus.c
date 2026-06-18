@@ -6,7 +6,7 @@
 /*   By: fsayuri- <fsayuri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 17:48:11 by fsayuri-          #+#    #+#             */
-/*   Updated: 2026/06/18 13:04:05 by fsayuri-         ###   ########.fr       */
+/*   Updated: 2026/06/18 14:32:37 by fsayuri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	get_content(int fd, char **res)
 	}
 }
 
-static void	get_res_and_result(char **res, char **result)
+static void	separate_res_and_result(char **res, char **result)
 {
 	int		len;
 	char	*temp;
@@ -85,6 +85,6 @@ char	*get_next_line(int fd)
 	if (!res[fd])
 		return (NULL);
 	get_content(fd, &res[fd]);
-	get_res_and_result(&res[fd], &result);
+	separate_res_and_result(&res[fd], &result);
 	return (result);
 }
