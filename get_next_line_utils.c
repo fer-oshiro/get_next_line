@@ -6,7 +6,7 @@
 /*   By: fsayuri- <fsayuri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 18:06:24 by fsayuri-          #+#    #+#             */
-/*   Updated: 2026/06/11 18:31:02 by fsayuri-         ###   ########.fr       */
+/*   Updated: 2026/06/18 12:32:31 by fsayuri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,24 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	sub[i] = '\0';
 	return (sub);
+}
+
+char	*ft_calloc(size_t nmemb, size_t size)
+{
+	size_t	total_size;
+	char	*ptr;
+
+	if (size != 0 && nmemb > SIZE_MAX / size)
+		return (NULL);
+	total_size = nmemb * size;
+	ptr = malloc(total_size);
+	if (ptr != NULL)
+	{
+		while (total_size > 0)
+		{
+			total_size--;
+			ptr[total_size] = 0;
+		}
+	}
+	return (ptr);
 }

@@ -6,60 +6,85 @@
 /*   By: fsayuri- <fsayuri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 17:48:11 by fsayuri-          #+#    #+#             */
-/*   Updated: 2026/06/12 12:31:42 by fsayuri-         ###   ########.fr       */
+/*   Updated: 2026/06/18 12:52:37 by fsayuri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-
-
-char *get_next_line(int fd)
+static void	get_res(int fd, char **res)
 {
-	char buff[BUFFER_SIZE + 1];
-	int bytes_read;
-	static char *res;
-	char *result;
-	int	len;
+	int	bytes_read;
+
+	if (*res)
+		return ;
+	*res = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!*res)
+		return ;
+	bytes_read = read(fd, *res, BUFFER_SIZE);
+	if (bytes_read <= 0)
+	{
+		free(*res);
+		*res = NULL;
+	}
+}
+
+static void	get_content(int fd, char **res)
+{
+	char	*buff;
+	char	*temp;
+	int		bytes_read;
+
+	while (ft_strchr(*res, '\n') == 0)
+	{
+		buff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		bytes_read = read(fd, buff, BUFFER_SIZE);
+		if (bytes_read <= 0)
+		{
+			free(buff);
+			break ;
+		}
+		temp = ft_strjoin(*res, buff);
+		free(*res);
+		*res = temp;
+		free(buff);
+	}
+}
+
+static void	get_res_and_result(char **res, char **result)
+{
+	int		len;
+	char	*temp;
+
+	temp = *res;
+	if (!temp || *temp == '\0')
+	{
+		free(*res);
+		*res = NULL;
+		return ;
+	}
+	len = 0;
+	while (temp[len] != '\n' && temp[len] != '\0')
+		len++;
+	*result = ft_substr(temp, 0, len + 1);
+	if (temp[len] == '\n' && temp[len + 1] != '\0')
+		*res = ft_substr(temp, len + 1, BUFFER_SIZE);
+	else
+		*res = NULL;
+	free(temp);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*res;
+	char		*result;
 
 	if (fd < 0)
 		return (NULL);
-
-	result = malloc(1);
-	result[0] = 0;
+	get_res(fd, &res);
 	if (!res)
-	{
-		res = malloc(1);
-		res[0] = 0;
-	}
-	else
-	{
-		result = ft_strjoin(result, res);
-	}
-	
-	bytes_read = read(fd, buff, BUFFER_SIZE);
-	if(bytes_read == 0)
 		return (NULL);
-	buff[bytes_read] = '\0';
-
-	if (bytes_read > 0)
-		result = ft_strjoin(result, buff);
-	while (bytes_read > 0 && ft_strchr(buff, '\n') == 0)
-	{
-		bytes_read = read(fd, buff, BUFFER_SIZE);
-		buff[bytes_read] = '\0';
-		if (ft_strchr(buff, '\n') != 0)
-		{
-			len = 0;
-			while (buff[len] != '\n')
-				len++;
-			result = ft_strjoin(result, ft_substr(buff, 0, len + 1));
-			if(res)
-				free(res);
-			res = ft_substr(ft_strchr(buff, '\n'), 1, BUFFER_SIZE);
-		}
-		else
-			result = ft_strjoin(result, buff);
-	}
+	get_content(fd, &res);
+	get_res_and_result(&res, &result);
 	return (result);
 }
