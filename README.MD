@@ -40,7 +40,6 @@ int main(void)
     int fd1 = open("file1.txt", O_RDONLY);
     char *line;
 
-    // Reading concurrently from multiple files
     line = get_next_line(fd1);
     printf("Fd 1: %s", line);
     free(line);
