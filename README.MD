@@ -32,7 +32,6 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_u
 Inside a dummy main.c:
 ```c
 #include "get_next_line.h"
-#include <fcntl.h>
 #include <stdio.h>
 
 int main(void)
